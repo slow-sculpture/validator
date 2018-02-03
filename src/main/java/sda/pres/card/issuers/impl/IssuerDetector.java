@@ -12,16 +12,25 @@ public class IssuerDetector implements IIssuerDetector {
     public String detectIssuer(String cardNo, String filePath) {
         String result = "UNKNOWN";
 
-        //TODO: zaimplementować klasę fabryki zwracającej obiekty typu IRuleBuilder
-        //na bazie parametru filePath
-        IRuleBuilder rulesBuilder = null;
-        if (filePath != null && !filePath.isEmpty()) {
-            rulesBuilder = new IssuerRuleFromFileBuilder(filePath);
-        } else {
-            rulesBuilder = new IssuerRuleBuilder();
-        }
+        //TODO: utworzyc nowa fabryke lub zmodyfikowac istniejaca tak aby
+        //typem zwracanym byla List<IssuerRule> a nie IRuleBuilder
 
+
+       /* //wyrzucenie logiki do fabryki
+        //fabryka - w celu wsadzenia tworzenia wszystkich elementow tworzycych obiekty
+        //w jedno miejsce
+        //wzywamy fabryke a ona tworzy odpowiedni obiekt*/
+
+        //=================linie do zmainy=======================
+        IRuleBuilder rulesBuilder = IssuerRuleBuilderFactory.produce(filePath);
         List<IssuerRule> issuerRules = rulesBuilder.buildRules();
+        //=======================================================
+        IssuerRuleListBuilderFactory list = new IssuerRuleListBuilderFactory();
+        List<IssuerRule> issuerRules1 = list.build(filePath);
+
+
+
+
 
         // algorytm przyrównuje każdą regułę do stringa cardNo przekazanego jako parametr
         // jeśli uda się dopasować regułę (program "wejdzie w ifa"), do zmiennej result
