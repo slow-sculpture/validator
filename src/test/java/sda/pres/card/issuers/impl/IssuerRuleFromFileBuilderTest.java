@@ -7,8 +7,6 @@ import sda.pres.card.issuers.IssuerRule;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class IssuerRuleFromFileBuilderTest {
 
     private static final String RULES_TXT_FILENAME = "rules.txt";
